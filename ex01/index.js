@@ -1,4 +1,9 @@
+// window.alert("Olá!");
 // alert("Olá!");
+let nome = prompt("Digite o seu nome: ");
+console.log("nome digitado = ", nome);
+
+console.log("Imprimindo algo no console...");
 
 document.getElementById("titulo1").innerHTML = "Título inicial";
 
