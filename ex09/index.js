@@ -1,5 +1,11 @@
 const lista = document.getElementById("lista");
 
+const taskUrl = "https://parseapi.back4app.com/classes/Task";
+const headers = {
+  "X-Parse-Application-Id": "RkjwBkfNZRERi3k4FVjojkTgLLe6CbbTPbW4qrQo",
+  "X-Parse-REST-API-Key": "wmn69SVNaLq6UoW177InOj1tnXUsy2fkfvtHagdu",
+};
+
 const renderizaLista = (lista, tarefas) => {
   lista.innerHTML = "";
   tarefas.forEach((tarefa) => {
@@ -13,15 +19,9 @@ const renderizaLista = (lista, tarefas) => {
 };
 
 const getTasks = () => {
-  fetch("https://parseapi.back4app.com/classes/Task", {
-    headers: {
-      "X-Parse-Application-Id": "RkjwBkfNZRERi3k4FVjojkTgLLe6CbbTPbW4qrQo",
-      "X-Parse-REST-API-Key": "wmn69SVNaLq6UoW177InOj1tnXUsy2fkfvtHagdu",
-    },
-  })
+  fetch(taskUrl, { headers: headers })
     .then((res) => res.json())
     .then((data) => {
-      console.log("data", data);
       renderizaLista(lista, data.results);
     });
 };
