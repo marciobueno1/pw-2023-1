@@ -14,12 +14,16 @@ const renderizaLista = (lista, tarefas) => {
     const itemText = document.createTextNode(
       `${tarefa.description} (${tarefa.done}) `
     );
-    const button = document.createElement("button");
-    button.innerHTML = "X";
-    button.onclick = () => deleteTask(tarefa.objectId);
+    const buttonDelete = document.createElement("button");
+    buttonDelete.innerHTML = "X";
+    buttonDelete.onclick = () => deleteTask(tarefa.objectId);
+    const buttonUpdate = document.createElement("button");
+    buttonUpdate.innerHTML = "DONE";
+    buttonUpdate.onclick = () => updateTask(tarefa);
     const listItem = document.createElement("li");
     listItem.appendChild(itemText);
-    listItem.appendChild(button);
+    listItem.appendChild(buttonDelete);
+    listItem.appendChild(buttonUpdate);
     lista.appendChild(listItem);
   });
 };
@@ -65,6 +69,26 @@ const deleteTask = (id) => {
   fetch(`${taskUrl}/${id}`, {
     method: "DELETE",
     headers: headers,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      getTasks();
+      console.log("data", data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const updateTask = (task) => {
+  fetch(`${taskUrl}/${task.objectId}`, {
+    method: "PUT",
+    headers: headers,
+    headers: {
+      ...headers,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ done: !task.done }),
   })
     .then((res) => res.json())
     .then((data) => {
