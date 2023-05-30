@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node ./index"
   },
+  "engines": {
+    "node": ">=16.16"
+  },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
