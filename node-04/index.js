@@ -8,6 +8,10 @@ var app = require("./app");
 var debug = require("debug")("node-04:server");
 var http = require("http");
 
+// exemplo de acesso à variáveis de ambiente
+console.log("PATH = ", process.env.PATH);
+console.log("PGDATABASE = ", process.env.PGDATABASE);
+
 /**
  * Get port from environment and store in Express.
  */
